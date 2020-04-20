@@ -2,7 +2,8 @@
 @import src/styles.sass
 
 .welcome
-  background: radial-gradient(at center, #FFF2F4, $base-color)
+  background: radial-gradient(at center, #FFF2F4, #FCFFE9)
+  height: 100vh
 
 .box
   cursor: pointer
@@ -26,6 +27,8 @@
     width: 0%
     height: 0%
     box-sizing: border-box
+    border-right: 0px solid black
+    border-top: 0px solid black
     animation: borderTopRight 1s forwards 2s
 
   &::after
@@ -36,6 +39,8 @@
     width: 0%
     height: 0%
     box-sizing: border-box
+    border-bottom: 0px solid black
+    border-left: 0px solid black
     animation: borderBottomLeft 1s forwards 2s
 
 @keyframes borderTopRight

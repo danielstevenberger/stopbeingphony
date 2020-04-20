@@ -1,0 +1,108 @@
+.info
+  height: 100vh
+  background: radial-gradient(at center, #a5abd0, #989FCE)
+
+.container
+  position: absolute
+  top: 50%
+  left: 50%
+  transform: translate(-50%, -50%)
+  text-align: center
+
+h1
+  overflow: hidden
+  white-space: nowrap
+  margin-bottom: 5rem
+  text-shadow: 0px 2px 2px rgba(0, 0, 0, .15)
+  animation: fade-text-in 2s forwards
+
+.school
+  color: #7c6498
+  font-size: 5rem
+
+.book
+  color: #5e98b1
+  font-size: 5rem
+
+.dumbell
+  color: #F7ACCF
+  font-size: 5rem
+
+.card
+  perspective: 150rem
+  -moz-perspective: 150rem
+  background: none
+  border: none
+  position: relative
+  height: 15rem
+  cursor: pointer
+
+  &:focus
+    outline: none
+
+  &-1
+    opacity: 0
+    animation: fade-in 1s forwards .5s
+  &-2
+    opacity: 0
+    animation: fade-in 1s forwards 1s
+  &-3
+    opacity: 0
+    animation: fade-in 1s forwards 1.5s
+
+  &__side
+    padding: 20px
+    border-radius: 20px
+    height: 15rem
+    transition: all .5s ease
+    position: absolute
+    width: 100%
+    backface-visibility: hidden
+    top: 0
+    left: 0
+    box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, .15)
+
+    &--front
+      background-color: white
+      display: flex
+      align-items: center
+      justify-content: center
+
+      &--text
+        font-size: 3rem
+
+    &--back
+      background-color: white
+      display: flex
+      align-items: center
+      justify-content: center
+      transform: rotateY(-180deg)
+
+      &-1
+        background: linear-gradient(to right bottom, #f6fff6, #DAF7DC)
+
+      &-2
+        background: linear-gradient(to right bottom, #faefd1, #feeaba)
+
+      &-3
+        background: linear-gradient(to right bottom, #f0fcff, #CDEDF6)
+
+  &:hover &__side--front
+    transform: rotateY(180deg)
+
+  &:hover &__side--back
+    transform: rotateY(0)
+
+  @keyframes fade-in
+    0%
+      opacity: 0
+    100%
+      opacity: 1
+
+  @keyframes fade-text-in
+    0%
+      opacity: 0
+      transform: translateY(-3rem)
+    100%
+    top: 25%
+      opacity: 1
