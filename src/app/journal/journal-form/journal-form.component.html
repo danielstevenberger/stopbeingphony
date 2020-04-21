@@ -7,7 +7,7 @@
          How long did you spend on your phone today?
         </h1>
       </div>
-      <div class="question-control row col-12">
+      <div class="question-control mx-auto row col-12">
         <div class="col-6">
           <h1 class="text-center">Hours</h1>
           <div class="hours mx-auto">
@@ -61,7 +61,7 @@
       <div class="col-12">
         <h1 class="question text-center">How did you feel today?</h1>
       </div>
-      <div class="question-control row col-12">
+      <div class="question-control mx-auto row col-12">
         <div class="mx-auto">
           <input formControlName="mood" type="radio" id="grin" value="5" />
           <label class="mood" for="grin">
@@ -99,7 +99,7 @@
       <div class="col-12">
         <h1 class="question text-center">How focused were you today?</h1>
       </div>
-      <div class="question-control row col-12">
+      <div class="question-control mx-auto row col-12">
         <div class="mx-auto">
           <input formControlName="focus" type="radio" id="full" value="3" />
           <label class="mood" for="full"
@@ -125,7 +125,7 @@
       <div class="col-12">
         <h1 class="question text-center">Would you like to add a note?</h1>
       </div>
-      <div class="question-control row col-12">
+      <div class="question-control mx-auto row col-12">
         <div class="mx-auto">
           <textarea class="form-control" formControlName="note"></textarea>
         </div>
@@ -136,8 +136,8 @@
       <div class="col-12">
         <h1 class="question text-center">Please Confirm</h1>
       </div>
-      <div class="question-control row col-12">
-        <div class="col-3 confirm-time">
+      <div class="question-control mx-auto row col-12">
+        <div class="col-12 col-lg-3  confirm-time">
           <p *ngIf="journalEntry.get('hours').value == 1">
             {{ journalEntry.get("hours").value }} hour
           </p>
@@ -146,7 +146,7 @@
           </p>
           <p>{{ journalEntry.get("minutes").value }} minutes</p>
         </div>
-        <div class="col-3">
+        <div class="col-6 col-lg-3  ">
           <div
             *ngIf="journalEntry.get('mood').value == 5"
             class="confirm-icon mx-auto"
@@ -178,7 +178,7 @@
             <fa-icon [icon]="faMehBlank"></fa-icon>
           </div>
         </div>
-        <div class="col-3 text-center">
+        <div class="col-6 col-lg-3">
           <div
             *ngIf="journalEntry.get('focus').value == 3"
             class="confirm-icon mx-auto"
@@ -198,7 +198,7 @@
             <fa-icon [icon]="faBatteryQuarter"></fa-icon>
           </div>
         </div>
-        <div class="col-3 confirm-note">
+        <div class="col-12 col-lg-3 confirm-note">
           Message: {{ journalEntry.get("note").value }}
         </div>
       </div>
