@@ -10,8 +10,6 @@
   text-align: center
 
 h1
-  overflow: hidden
-  white-space: nowrap
   margin-bottom: 5rem
   text-shadow: 0px 2px 2px rgba(0, 0, 0, .15)
   animation: fade-text-in 2s forwards
@@ -77,6 +75,7 @@ h1
       align-items: center
       justify-content: center
       transform: rotateY(-180deg)
+      outline: none
 
       &-1
         background: linear-gradient(to right bottom, #f6fff6, #DAF7DC)
@@ -104,5 +103,19 @@ h1
       opacity: 0
       transform: translateY(-3rem)
     100%
-    top: 25%
       opacity: 1
+
+@media screen and ( max-width: 765px)
+  .card
+    height: 10rem
+
+    &__side
+      height: 7rem
+      &--front
+        &--text
+          font-size: 2rem
+  h1
+    font-size: 1.5rem
+
+  .school, .dumbell, .book
+    font-size: 3rem

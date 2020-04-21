@@ -1,0 +1,238 @@
+<div class="container">
+  <form [formGroup]="journalEntry" (ngSubmit)="submitForm()">
+    <!-- hours -->
+    <div *ngIf="question == 0" class="form-row">
+      <div class="col-12">
+        <h1 class="text-center question">
+         How long did you spend on your phone today?
+        </h1>
+      </div>
+      <div class="question-control row col-12">
+        <div class="col-6">
+          <h1 class="text-center">Hours</h1>
+          <div class="hours mx-auto">
+            <input type="number" [(ngModel)]="hours" formControlName="hours" />
+            <button type="button" class="plus" (click)="onHours('plus')">
+              <fa-icon [icon]="faPlus"></fa-icon>
+            </button>
+            <button type="button" class="minus" (click)="onHours('minus')">
+              <fa-icon [icon]="faMinus"></fa-icon>
+            </button>
+          </div>
+          <p
+            *ngIf="
+              !journalEntry.get('hours').valid &&
+              journalEntry.get('hours').touched
+            "
+            class="text-center mt-4"
+          >
+            Must be between 0 and 24
+        </p>
+        </div>
+        <div class="col-6">
+          <h1 class="text-center">Minutes</h1>
+          <div class="hours mx-auto">
+            <input
+              type="number"
+              [(ngModel)]="minutes"
+              formControlName="minutes"
+            />
+            <button type="button" class="plus" (click)="onMinutes('plus')">
+              <fa-icon [icon]="faPlus"></fa-icon>
+            </button>
+            <button type="button" class="minus" (click)="onMinutes('minus')">
+              <fa-icon [icon]="faMinus"></fa-icon>
+            </button>
+          </div>
+          <p
+            *ngIf="
+              !journalEntry.get('minutes').valid &&
+              journalEntry.get('minutes').touched
+            "
+            class="text-center mt-4"
+          >
+            Must be between 0 and 60
+        </p>
+        </div>
+      </div>
+    </div>
+    <!-- mood -->
+    <div *ngIf="question == 1" class="form-row">
+      <div class="col-12">
+        <h1 class="question text-center">How did you feel today?</h1>
+      </div>
+      <div class="question-control row col-12">
+        <div class="mx-auto">
+          <input formControlName="mood" type="radio" id="grin" value="5" />
+          <label class="mood" for="grin">
+            <fa-icon [icon]="faGrinBeam"></fa-icon
+          ></label>
+        </div>
+        <div class="mx-auto">
+          <input formControlName="mood" type="radio" id="smile" value="4" />
+          <label class="mood" for="smile"
+            ><fa-icon [icon]="faSmile"></fa-icon
+          ></label>
+        </div>
+        <div class="mx-auto">
+          <input formControlName="mood" type="radio" id="meh" value="3" />
+          <label class="mood" for="meh"
+            ><fa-icon [icon]="faMeh"></fa-icon
+          ></label>
+        </div>
+        <div class="mx-auto">
+          <input formControlName="mood" type="radio" id="frown" value="2" />
+          <label class="mood" for="frown"
+            ><fa-icon [icon]="faFrown"></fa-icon
+          ></label>
+        </div>
+        <div class="mx-auto">
+          <input formControlName="mood" type="radio" id="blank" value="1" />
+          <label class="mood" for="blank"
+            ><fa-icon [icon]="faMehBlank"></fa-icon
+          ></label>
+        </div>
+      </div>
+    </div>
+    <!-- focus -->
+    <div *ngIf="question == 2" class="form-row">
+      <div class="col-12">
+        <h1 class="question text-center">How focused were you today?</h1>
+      </div>
+      <div class="question-control row col-12">
+        <div class="mx-auto">
+          <input formControlName="focus" type="radio" id="full" value="3" />
+          <label class="mood" for="full"
+            ><fa-icon [icon]="faBatteryFull"></fa-icon
+          ></label>
+        </div>
+        <div class="mx-auto">
+          <input formControlName="focus" type="radio" id="half" value="2" />
+          <label class="mood" for="half"
+            ><fa-icon [icon]="faBatteryHalf"></fa-icon
+          ></label>
+        </div>
+        <div class="mx-auto">
+          <input formControlName="focus" type="radio" id="quarter" value="1" />
+          <label class="mood" for="quarter"
+            ><fa-icon [icon]="faBatteryQuarter"></fa-icon
+          ></label>
+        </div>
+      </div>
+    </div>
+    <!-- message -->
+    <div *ngIf="question == 3" class="form-row">
+      <div class="col-12">
+        <h1 class="question text-center">Would you like to add a note?</h1>
+      </div>
+      <div class="question-control row col-12">
+        <div class="mx-auto">
+          <textarea class="form-control" formControlName="note"></textarea>
+        </div>
+      </div>
+    </div>
+    <!-- confirm -->
+    <div *ngIf="question == 4" class="form-row">
+      <div class="col-12">
+        <h1 class="question text-center">Please Confirm</h1>
+      </div>
+      <div class="question-control row col-12">
+        <div class="col-3 confirm-time">
+          <p *ngIf="journalEntry.get('hours').value == 1">
+            {{ journalEntry.get("hours").value }} hour
+          </p>
+          <p *ngIf="journalEntry.get('hours').value != 1">
+            {{ journalEntry.get("hours").value }} hours
+          </p>
+          <p>{{ journalEntry.get("minutes").value }} minutes</p>
+        </div>
+        <div class="col-3">
+          <div
+            *ngIf="journalEntry.get('mood').value == 5"
+            class="confirm-icon mx-auto"
+          >
+            <fa-icon [icon]="faGrinBeam"></fa-icon>
+          </div>
+          <div
+            *ngIf="journalEntry.get('mood').value == 4"
+            class="confirm-icon mx-auto"
+          >
+            <fa-icon [icon]="faSmile"></fa-icon>
+          </div>
+          <div
+            *ngIf="journalEntry.get('mood').value == 3"
+            class="confirm-icon mx-auto"
+          >
+            <fa-icon [icon]="faMeh"></fa-icon>
+          </div>
+          <div
+            *ngIf="journalEntry.get('mood').value == 2"
+            class="confirm-icon mx-auto"
+          >
+            <fa-icon [icon]="faFrown"></fa-icon>
+          </div>
+          <div
+            *ngIf="journalEntry.get('mood').value == 1"
+            class="confirm-icon mx-auto"
+          >
+            <fa-icon [icon]="faMehBlank"></fa-icon>
+          </div>
+        </div>
+        <div class="col-3 text-center">
+          <div
+            *ngIf="journalEntry.get('focus').value == 3"
+            class="confirm-icon mx-auto"
+          >
+            <fa-icon [icon]="faBatteryFull"></fa-icon>
+          </div>
+          <div
+            *ngIf="journalEntry.get('focus').value == 2"
+            class="confirm-icon mx-auto"
+          >
+            <fa-icon [icon]="faBatteryHalf"></fa-icon>
+          </div>
+          <div
+            *ngIf="journalEntry.get('focus').value == 1"
+            class="confirm-icon mx-auto"
+          >
+            <fa-icon [icon]="faBatteryQuarter"></fa-icon>
+          </div>
+        </div>
+        <div class="col-3 confirm-note">
+          Message: {{ journalEntry.get("note").value }}
+        </div>
+      </div>
+    </div>
+    <!-- button control -->
+    <div class="button-control text-center">
+      <p *ngIf="question == 4 && !journalEntry.valid" class="text-center">
+        Time, Mood, and Focus are required.
+      </p>
+      <button
+        *ngIf="question > 0"
+        class="btn btn-light shadow-none"
+        type="button"
+        (click)="changeQuestion('prev')"
+      >
+        Previous Question
+      </button>
+      <button
+        *ngIf="question < 4"
+        class="btn btn-light shadow-none"
+        type="button"
+        (click)="changeQuestion('next')"
+        [disabled]="((!journalEntry.get('hours').valid || !journalEntry.get('minutes').valid) && question==0) || (!journalEntry.get('mood').valid && question==1) || (!journalEntry.get('focus').valid && question==2)"
+      >
+        Next Question
+      </button>
+      <button
+        *ngIf="question == 4"
+        [disabled]="!journalEntry.valid"
+        class="btn btn-light"
+        type="submit"
+      >
+        Submit
+      </button>
+    </div>
+  </form>
+</div>

@@ -6,7 +6,6 @@ import { LearnComponent } from './learn/learn.component';
 import { JournalComponent } from './journal/journal.component';
 import { ExerciseComponent } from './exercise/exercise.component';
 
-
 const routes: Routes = [
   {path: "hello", component: HomeComponent},
   {path: "", redirectTo:"/hello", pathMatch: "full" },
