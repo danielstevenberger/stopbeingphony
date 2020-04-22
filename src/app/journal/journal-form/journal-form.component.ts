@@ -12,6 +12,7 @@ import {
   faBatteryHalf,
   faBatteryQuarter,
 } from "@fortawesome/free-solid-svg-icons";
+import { JournalEntriesService } from '../journal-entries.service';
 
 @Component({
   selector: "app-journal-form",
@@ -35,7 +36,7 @@ export class JournalFormComponent implements OnInit {
   hours = 0;
   minutes = 0;
 
-  constructor() {}
+  constructor(private journalEntryService: JournalEntriesService) {}
 
   ngOnInit(): void {
     this.journalEntry = new FormGroup({
@@ -57,6 +58,14 @@ export class JournalFormComponent implements OnInit {
   submitForm() {
     if (this.journalEntry.valid) {
       console.log(this.journalEntry.value);
+      var timeOnPhone =  this.journalEntry.get('hours').value * 60 + this.journalEntry.get('minutes').value
+      this.journalEntryService.addJournalEntry(
+        timeOnPhone,
+        +this.journalEntry.get('mood').value,
+        +this.journalEntry.get('focus').value,
+        this.journalEntry.get('note').value
+      )
+      console.log(this.journalEntryService.getJounralEntries())
     }
   }
 
