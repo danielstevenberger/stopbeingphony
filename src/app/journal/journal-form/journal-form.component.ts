@@ -31,7 +31,7 @@ export class JournalFormComponent implements OnInit {
   faBatteryHalf = faBatteryHalf;
   faBatteryQuarter = faBatteryQuarter;
 
-  question = 4;
+  question = 0;
   hours = 0;
   minutes = 0;
 

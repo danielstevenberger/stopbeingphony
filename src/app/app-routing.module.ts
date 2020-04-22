@@ -9,10 +9,10 @@ import { ExerciseComponent } from './exercise/exercise.component';
 const routes: Routes = [
   {path: "hello", component: HomeComponent},
   {path: "", redirectTo:"/hello", pathMatch: "full" },
-  {path: "intro", component: IntroComponent},
+  {path: "home", component: IntroComponent},
   {path: "learn", component: LearnComponent},
   {path: "journal", component: JournalComponent},
-  {path: "exercise", component: ExerciseComponent},
+  {path: "profile", component: ExerciseComponent},
   {path: "**", redirectTo:"/hello"}
 ];
 

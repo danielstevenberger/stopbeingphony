@@ -1,5 +1,5 @@
 import { Component, HostListener } from "@angular/core";
-import { faDumbbell } from "@fortawesome/free-solid-svg-icons";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { faBook } from "@fortawesome/free-solid-svg-icons";
 import { faSchool } from "@fortawesome/free-solid-svg-icons";
 
@@ -9,7 +9,7 @@ import { faSchool } from "@fortawesome/free-solid-svg-icons";
   styleUrls: ["./intro.component.sass"],
 })
 export class IntroComponent {
-  faDumbbell = faDumbbell;
+  faUser = faUser;
   faBook = faBook;
   faSchool = faSchool;
 

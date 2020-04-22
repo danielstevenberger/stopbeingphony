@@ -11,10 +11,11 @@ import { LearnComponent } from './learn/learn.component';
 import { ExerciseComponent } from './exercise/exercise.component';
 import { JournalComponent } from './journal/journal.component';
 import { JournalFormComponent } from './journal/journal-form/journal-form.component';
-import {ReactiveFormsModule, FormsModule} from "@angular/forms"
+import {ReactiveFormsModule, FormsModule} from "@angular/forms";
+import { NavbarComponent } from './navbar/navbar.component'
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, IntroComponent, LearnComponent, ExerciseComponent, JournalComponent, JournalFormComponent],
+  declarations: [AppComponent, HomeComponent, IntroComponent, LearnComponent, ExerciseComponent, JournalComponent, JournalFormComponent, NavbarComponent],
   imports: [BrowserModule, BrowserAnimationsModule, AppRoutingModule, FontAwesomeModule, ReactiveFormsModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],

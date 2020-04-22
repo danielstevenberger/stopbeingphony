@@ -18,8 +18,4 @@ export class HomeComponent {
     this.top = Math.round(event.clientY / window.innerHeight * 100)
     this.left = Math.round(event.clientX / window.innerWidth * 100)
   }
-
-  onClick(){
-    this.router.navigate(['intro'])
-  }
 }
