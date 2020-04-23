@@ -4,7 +4,7 @@ import { HomeComponent } from './home/home.component';
 import { IntroComponent } from './intro/intro.component';
 import { LearnComponent } from './learn/learn.component';
 import { JournalComponent } from './journal/journal.component';
-import { ExerciseComponent } from './exercise/exercise.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   {path: "hello", component: HomeComponent},
@@ -12,7 +12,7 @@ const routes: Routes = [
   {path: "home", component: IntroComponent},
   {path: "learn", component: LearnComponent},
   {path: "journal", component: JournalComponent},
-  {path: "profile", component: ExerciseComponent},
+  {path: "profile", component: ProfileComponent},
   {path: "**", redirectTo:"/hello"}
 ];
 

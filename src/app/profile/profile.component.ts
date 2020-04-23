@@ -2,10 +2,10 @@ import { Component, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-exercise',
-  templateUrl: './exercise.component.html',
-  styleUrls: ['./exercise.component.sass']
+  templateUrl: './profile.component.html',
+  styleUrls: ['./profile.component.sass']
 })
-export class ExerciseComponent {
+export class ProfileComponent {
   top: number;
   left: number;
 

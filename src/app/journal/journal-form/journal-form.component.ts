@@ -12,7 +12,8 @@ import {
   faBatteryHalf,
   faBatteryQuarter,
 } from "@fortawesome/free-solid-svg-icons";
-import { JournalEntriesService } from '../journal-entries.service';
+import { JournalEntriesService } from "../journal-entries.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-journal-form",
@@ -35,8 +36,12 @@ export class JournalFormComponent implements OnInit {
   question = 0;
   hours = 0;
   minutes = 0;
+  alreadySubmitted = false;
 
-  constructor(private journalEntryService: JournalEntriesService) {}
+  constructor(
+    private journalEntryService: JournalEntriesService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.journalEntry = new FormGroup({
@@ -57,16 +62,21 @@ export class JournalFormComponent implements OnInit {
   }
   submitForm() {
     if (this.journalEntry.valid) {
-      console.log(this.journalEntry.value);
-      var timeOnPhone =  this.journalEntry.get('hours').value * 60 + this.journalEntry.get('minutes').value
-      this.journalEntryService.addJournalEntry(
-        timeOnPhone,
-        +this.journalEntry.get('mood').value,
-        +this.journalEntry.get('focus').value,
-        this.journalEntry.get('note').value
-      )
-      console.log(this.journalEntryService.getJounralEntries())
+      if (this.journalEntryService.checkDay(new Date())) {
+        var timeOnPhone =
+          this.journalEntry.get("hours").value +
+          +(this.journalEntry.get("minutes").value / 60).toFixed(2);
+        console.log(timeOnPhone);
+        this.journalEntryService.addJournalEntry(
+          timeOnPhone,
+          +this.journalEntry.get("mood").value,
+          +this.journalEntry.get("focus").value,
+          this.journalEntry.get("note").value
+        );
+        this.router.navigate(["/profile"]);
+      }
     }
+    this.alreadySubmitted = true;
   }
 
   onHours(direction: string) {
