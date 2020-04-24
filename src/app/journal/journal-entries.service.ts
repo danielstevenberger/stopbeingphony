@@ -2,32 +2,38 @@ import { Injectable, EventEmitter } from "@angular/core";
 import { JournalEntry } from "./journal-entry.model";
 import { DateServiceService } from "../date-service/date-service.service";
 import { Subject } from "rxjs";
+import { MonthlyData, WeeklyData, YearlyData} from 'src/app/profile/profile-data/pofile-data.interface'
 
 @Injectable({
   providedIn: "root",
 })
 export class JournalEntriesService {
   private jouranlEntries: JournalEntry[];
-  public weeklyEntries = new Subject<{
-    hours: number[];
-    mood: number[];
-    focus: number[];
-    notes: string[];
-  }>();
+  public weeklyEntries = new Subject<WeeklyData>();
+  public monthlyEntries = new Subject<MonthlyData>();
+  public yearlyEntries = new Subject<YearlyData>();
 
   constructor(private dateService: DateServiceService) {
     this.jouranlEntries = [
-      new JournalEntry(new Date(2020, 3, 12), 0, 5, 1, "hello"),
-      new JournalEntry(new Date(2020, 3, 13), 1, 5, 1),
-      new JournalEntry(new Date(2020, 3, 14), 2, 5, 1, "hello"),
-      new JournalEntry(new Date(2020, 3, 15), 3, 5, 1, "hello"),
-      new JournalEntry(new Date(2020, 3, 16), 4, 5, 1),
-      new JournalEntry(new Date(2020, 3, 17), 5, 5, 1, "hello"),
-      new JournalEntry(new Date(2020, 3, 18), 6, 5, 1, "hello"),
-      new JournalEntry(new Date(2020, 3, 19), 7, 5, 1, "hello"),
-      new JournalEntry(new Date(2020, 3, 20), 8, 5, 1),
-      new JournalEntry(new Date(2020, 3, 21), 9, 5, 1, "hello"),
-      new JournalEntry(new Date(2020, 3, 22), 9, 5, 1),
+      new JournalEntry(new Date(2020, 0, 1), 3, 5, 2),
+      new JournalEntry(new Date(2020, 0, 2), 2, 1, 2),
+      new JournalEntry(new Date(2020, 0, 3), 5, 2, 3),
+      new JournalEntry(new Date(2020, 0, 4), 7, 4, 3),
+      new JournalEntry(new Date(2020, 0, 5), 2, 3, 1),
+      new JournalEntry(new Date(2020, 0, 6), 1, 3, 2),
+      new JournalEntry(new Date(2020, 0, 7), 0, 2, 3),
+      new JournalEntry(new Date(2020, 0, 8), 7, 5, 1),
+      new JournalEntry(new Date(2020, 3, 12), 4, 5, 2, "hello"),
+      new JournalEntry(new Date(2020, 3, 13), 5, 3, 2),
+      new JournalEntry(new Date(2020, 3, 14), 6, 2, 3, "hello"),
+      new JournalEntry(new Date(2020, 3, 15), 1, 4, 1, "hello"),
+      new JournalEntry(new Date(2020, 3, 16), 3, 4, 2),
+      new JournalEntry(new Date(2020, 3, 17), 3, 1, 3, "hello"),
+      new JournalEntry(new Date(2020, 3, 18), 1, 3, 3, "hello"),
+      new JournalEntry(new Date(2020, 3, 19), 3, 4, 1, "hello"),
+      new JournalEntry(new Date(2020, 3, 20), 4, 2, 1),
+      new JournalEntry(new Date(2020, 3, 21), 3, 1, 2, "hello"),
+      new JournalEntry(new Date(2020, 3, 22), 5, 5, 2),
       // new JournalEntry(new Date(2020, 3, 23), 9, 5, 1),
       // new JournalEntry(new Date(2020, 3, 24), 9, 5, 1),
       // new JournalEntry(new Date(2020, 3, 25), 9, 5, 1),
@@ -45,7 +51,7 @@ export class JournalEntriesService {
 
   getJounralEntries() {
     // return this.jouranlEntries.slice();
-    return (this.jouranlEntries.length)
+    return this.jouranlEntries.length;
   }
 
   getRecentWeekHours(d: Date) {
@@ -59,17 +65,6 @@ export class JournalEntriesService {
     var mood = [];
     var focus = [];
     var notes = [];
-    // var givenDate = d;
-    // var day = givenDate.getDay();
-    // var diff = givenDate.getDate() - day;
-    // var nextSunday = new Date(givenDate.setDate(diff + 7));
-    // nextSunday.setHours(0,0,0,0);
-    // var sunday = new Date(givenDate.setDate(diff));
-    // sunday.setHours(0, 0, 0, 0);
-
-    // var givenDate2 = d;
-    // var day2 = givenDate2.getDay();
-    // var diff2 = givenDate2.getDate() - day2;
 
     for (let i = 0; i < 7; i++) {
       for (var x = 0; x < this.jouranlEntries.length; x++) {
@@ -97,24 +92,19 @@ export class JournalEntriesService {
               hours.push(null);
               mood.push(null);
               focus.push(null);
-              notes.push("");
+              notes.push(null);
               break;
             } else {
               hours = [null];
               mood = [null];
               focus = [null];
-              notes = [""];
+              notes = [null];
               break;
             }
           }
         }
       }
     }
-    // if (notes.length < 7) {
-    //   while(notes.length < 7){
-    //    notes.push('null')
-    //   }
-    // }
     this.weeklyEntries.next({ hours, mood, focus, notes });
     return { hours, mood, focus, notes };
   }
@@ -122,9 +112,99 @@ export class JournalEntriesService {
   checkDay(d: Date) {
     for (let i = 0; i < this.jouranlEntries.length; i++) {
       if (this.jouranlEntries[i].date.getDate() == d.getDate()) {
-        return false
+        return false;
       }
     }
-    return true
+    return true;
+  }
+
+  getDataByMonth(d: Date) {
+    var year = new Date(d).getFullYear();
+    var month = new Date(d).getMonth();
+    var hours: number;
+    var mood: number;
+    var focus: number;
+    var entries = 0;
+    for (var i = 0; i < this.jouranlEntries.length; i++) {
+      if (
+        this.jouranlEntries[i].date.getMonth() == month &&
+        this.jouranlEntries[i].date.getFullYear() == year
+      ) {
+        if (entries > 0) {
+          hours += this.jouranlEntries[i].time;
+          mood += this.jouranlEntries[i].mood;
+          focus += this.jouranlEntries[i].focus;
+        } else {
+          hours = this.jouranlEntries[i].time;
+          mood = this.jouranlEntries[i].mood;
+          focus = this.jouranlEntries[i].focus;
+        }
+        entries ++
+      }
+    }
+   var averageMood = mood / entries
+   var averageFocus = focus / entries
+
+   this.monthlyEntries.next({
+     hours,
+     averageMood,
+     averageFocus
+   })
+   return({
+    hours,
+    averageMood,
+    averageFocus
+   })
+  }
+
+  getDataByYear(d: Date){
+    var year = new Date(d).getFullYear();
+    var hours: number[]
+    var averageMood: number[]
+    var averageFocus: number[]
+    for(var i = 0; i < 12; i++){
+      var tempHours = 0;
+      var tempMood = 0;
+      var tempFocus = 0;
+      var entries = 0;
+      for(var x = 0; x < this.jouranlEntries.length; x++){
+        if (
+          this.jouranlEntries[x].date.getMonth() == i &&
+          this.jouranlEntries[x].date.getFullYear() == year
+        ){
+          if (entries > 0) {
+            tempHours += this.jouranlEntries[x].time;
+            tempMood += this.jouranlEntries[x].mood;
+            tempFocus += this.jouranlEntries[x].focus;
+          } else {
+            tempHours = this.jouranlEntries[x].time;
+            tempMood = this.jouranlEntries[x].mood;
+            tempFocus = this.jouranlEntries[x].focus;
+          }
+          entries ++
+        }
+      }
+      if(i == 0){
+        hours = [tempHours]
+        averageMood = [Math.round(tempMood / entries)]
+        averageFocus = [Math.round(tempFocus / entries)]
+      }
+      else{
+        hours.push(tempHours)
+        averageMood.push(Math.round(tempMood /entries))
+        averageFocus.push(Math.round(tempFocus / entries))
+      }
+    }
+    this.yearlyEntries.next({
+      hours,
+      averageMood,
+      averageFocus
+    }
+    )
+    return ({
+      hours,
+      averageMood,
+      averageFocus
+    })
   }
 }
