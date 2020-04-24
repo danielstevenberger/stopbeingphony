@@ -2,7 +2,11 @@ import { Injectable, EventEmitter } from "@angular/core";
 import { JournalEntry } from "./journal-entry.model";
 import { DateServiceService } from "../date-service/date-service.service";
 import { Subject } from "rxjs";
-import { MonthlyData, WeeklyData, YearlyData} from 'src/app/profile/profile-data/pofile-data.interface'
+import {
+  MonthlyData,
+  WeeklyData,
+  YearlyData,
+} from "src/app/profile/profile-data/pofile-data.interface";
 
 @Injectable({
   providedIn: "root",
@@ -15,25 +19,25 @@ export class JournalEntriesService {
 
   constructor(private dateService: DateServiceService) {
     this.jouranlEntries = [
-      new JournalEntry(new Date(2020, 0, 1), 3, 5, 2),
-      new JournalEntry(new Date(2020, 0, 2), 2, 1, 2),
-      new JournalEntry(new Date(2020, 0, 3), 5, 2, 3),
-      new JournalEntry(new Date(2020, 0, 4), 7, 4, 3),
-      new JournalEntry(new Date(2020, 0, 5), 2, 3, 1),
-      new JournalEntry(new Date(2020, 0, 6), 1, 3, 2),
-      new JournalEntry(new Date(2020, 0, 7), 0, 2, 3),
-      new JournalEntry(new Date(2020, 0, 8), 7, 5, 1),
-      new JournalEntry(new Date(2020, 3, 12), 4, 5, 2, "hello"),
-      new JournalEntry(new Date(2020, 3, 13), 5, 3, 2),
-      new JournalEntry(new Date(2020, 3, 14), 6, 2, 3, "hello"),
-      new JournalEntry(new Date(2020, 3, 15), 1, 4, 1, "hello"),
+      new JournalEntry(new Date(2020, 0, 1), 7.5, 1, 1),
+      new JournalEntry(new Date(2020, 0, 2), 7.2, 1, 1),
+      new JournalEntry(new Date(2020, 0, 3), 6.8, 2, 1),
+      new JournalEntry(new Date(2020, 0, 4), 6.5, 2, 1),
+      new JournalEntry(new Date(2020, 0, 5), 5.1, 3, 2),
+      new JournalEntry(new Date(2020, 0, 6), 5.5, 3, 2),
+      new JournalEntry(new Date(2020, 0, 7), 5.7, 3, 2),
+      new JournalEntry(new Date(2020, 0, 8), 5.4, 3, 2),
+      new JournalEntry(new Date(2020, 3, 12), 4, 3, 2, "hello"),
+      new JournalEntry(new Date(2020, 3, 13), 4.5, 3, 2),
+      new JournalEntry(new Date(2020, 3, 14), 4.7, 3, 2, "hello"),
+      new JournalEntry(new Date(2020, 3, 15), 3.8, 4, 2, "hello"),
       new JournalEntry(new Date(2020, 3, 16), 3, 4, 2),
-      new JournalEntry(new Date(2020, 3, 17), 3, 1, 3, "hello"),
-      new JournalEntry(new Date(2020, 3, 18), 1, 3, 3, "hello"),
-      new JournalEntry(new Date(2020, 3, 19), 3, 4, 1, "hello"),
-      new JournalEntry(new Date(2020, 3, 20), 4, 2, 1),
-      new JournalEntry(new Date(2020, 3, 21), 3, 1, 2, "hello"),
-      new JournalEntry(new Date(2020, 3, 22), 5, 5, 2),
+      new JournalEntry(new Date(2020, 3, 17), 3.2, 4, 2, "hello"),
+      new JournalEntry(new Date(2020, 3, 18), 2.2, 3, 3, "hello"),
+      new JournalEntry(new Date(2020, 3, 19), 2.2, 5, 2, "hello"),
+      new JournalEntry(new Date(2020, 3, 20), 1, 4, 3),
+      new JournalEntry(new Date(2020, 3, 21), 0.5, 5, 2, "hello"),
+      new JournalEntry(new Date(2020, 3, 22), 2, 4, 3),
       // new JournalEntry(new Date(2020, 3, 23), 9, 5, 1),
       // new JournalEntry(new Date(2020, 3, 24), 9, 5, 1),
       // new JournalEntry(new Date(2020, 3, 25), 9, 5, 1),
@@ -139,39 +143,39 @@ export class JournalEntriesService {
           mood = this.jouranlEntries[i].mood;
           focus = this.jouranlEntries[i].focus;
         }
-        entries ++
+        entries++;
       }
     }
-   var averageMood = mood / entries
-   var averageFocus = focus / entries
+    var averageMood = mood / entries;
+    var averageFocus = focus / entries;
 
-   this.monthlyEntries.next({
-     hours,
-     averageMood,
-     averageFocus
-   })
-   return({
-    hours,
-    averageMood,
-    averageFocus
-   })
+    this.monthlyEntries.next({
+      hours,
+      averageMood,
+      averageFocus,
+    });
+    return {
+      hours,
+      averageMood,
+      averageFocus,
+    };
   }
 
-  getDataByYear(d: Date){
+  getDataByYear(d: Date) {
     var year = new Date(d).getFullYear();
-    var hours: number[]
-    var averageMood: number[]
-    var averageFocus: number[]
-    for(var i = 0; i < 12; i++){
+    var hours: number[];
+    var averageMood: number[];
+    var averageFocus: number[];
+    for (var i = 0; i < 12; i++) {
       var tempHours = 0;
       var tempMood = 0;
       var tempFocus = 0;
       var entries = 0;
-      for(var x = 0; x < this.jouranlEntries.length; x++){
+      for (var x = 0; x < this.jouranlEntries.length; x++) {
         if (
           this.jouranlEntries[x].date.getMonth() == i &&
           this.jouranlEntries[x].date.getFullYear() == year
-        ){
+        ) {
           if (entries > 0) {
             tempHours += this.jouranlEntries[x].time;
             tempMood += this.jouranlEntries[x].mood;
@@ -181,30 +185,56 @@ export class JournalEntriesService {
             tempMood = this.jouranlEntries[x].mood;
             tempFocus = this.jouranlEntries[x].focus;
           }
-          entries ++
+          entries++;
         }
       }
-      if(i == 0){
-        hours = [tempHours]
-        averageMood = [Math.round(tempMood / entries)]
-        averageFocus = [Math.round(tempFocus / entries)]
-      }
-      else{
-        hours.push(tempHours)
-        averageMood.push(Math.round(tempMood /entries))
-        averageFocus.push(Math.round(tempFocus / entries))
+      if (i == 0) {
+        hours = [Math.round(tempHours)];
+        averageMood = [Math.round(tempMood / entries)];
+        averageFocus = [Math.round(tempFocus / entries)];
+      } else {
+        hours.push(Math.round(tempHours));
+        averageMood.push(Math.round(tempMood / entries));
+        averageFocus.push(Math.round(tempFocus / entries));
       }
     }
     this.yearlyEntries.next({
       hours,
       averageMood,
-      averageFocus
-    }
-    )
-    return ({
+      averageFocus,
+    });
+    return {
       hours,
       averageMood,
-      averageFocus
-    })
+      averageFocus,
+    };
+  }
+
+  getHoursMood() {
+    var hoursMood: Array<object>
+    for (var i = 0; i < this.jouranlEntries.length; i++) {
+      var dataSet = {x: this.jouranlEntries[i].time, y: this.jouranlEntries[i].mood}
+      if(i == 0){
+        hoursMood = [dataSet]
+      }
+      else{
+        hoursMood.push(dataSet)
+      }
+    }
+    return hoursMood
+  }
+
+  getHoursFocus() {
+    var hoursfocus: Array<object>
+    for (var i = 0; i < this.jouranlEntries.length; i++) {
+      var dataSet = {x: this.jouranlEntries[i].time, y: this.jouranlEntries[i].focus}
+      if(i == 0){
+        hoursfocus = [dataSet]
+      }
+      else{
+        hoursfocus.push(dataSet)
+      }
+    }
+    return hoursfocus
   }
 }

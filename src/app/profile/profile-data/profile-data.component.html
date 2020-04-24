@@ -1,9 +1,15 @@
 <p *ngIf="!noJournals">No Journal Entries</p>
 <div class="chart-wrapper mx-auto" style="padding-top: 5rem;">
-  <h1 class="text-center">Your Data in {{ currentSunday.getFullYear() }}</h1>
+  <h1 class="text-center">Here's the data we gathered from your jounral entries</h1>
+  <h3 *ngIf="view == 'week'" class="text-center my-4">
+    Week of {{ currentSunday | date: "shortDate" }}
+  </h3>
+  <h3 *ngIf="view == 'year'" class="text-center my-4">
+    Year {{ currentYear.getFullYear() }}
+  </h3>
   <div class="container">
     <div class="row">
-      <div class="col-12 col-md-4">
+      <div *ngIf="view == 'year'" class="col-12 col-md-4">
         <canvas
           baseChart
           [datasets]="hourYearData"
@@ -15,7 +21,7 @@
         >
         </canvas>
       </div>
-      <div class="col-12 col-md-4">
+      <div *ngIf="view == 'year'" class="col-12 col-md-4">
         <canvas
           baseChart
           [datasets]="moodYearData"
@@ -28,7 +34,7 @@
         >
         </canvas>
       </div>
-      <div class="col-12 col-md-4">
+      <div *ngIf="view == 'year'" class="col-12 col-md-4">
         <canvas
           baseChart
           [datasets]="focusYearData"
@@ -41,12 +47,12 @@
         >
         </canvas>
       </div>
-      <div class="col-12">
+      <!-- <div class="col-12">
         <h3 class="text-center my-4">
           Week of {{ currentSunday | date: "shortDate" }}
         </h3>
-      </div>
-      <div class="col-12 col-md-4">
+      </div> -->
+      <div *ngIf="view == 'week'" class="col-12 col-md-4">
         <canvas
           baseChart
           [datasets]="lineChartData"
@@ -59,7 +65,7 @@
         >
         </canvas>
       </div>
-      <div class="col-12 col-md-4">
+      <div *ngIf="view == 'week'" class="col-12 col-md-4">
         <canvas
           baseChart
           [datasets]="moodData"
@@ -72,7 +78,7 @@
         >
         </canvas>
       </div>
-      <div class="col-12 col-md-4">
+      <div *ngIf="view == 'week'" class="col-12 col-md-4">
         <canvas
           baseChart
           [datasets]="focusData"
@@ -85,47 +91,59 @@
         >
         </canvas>
       </div>
+      <div *ngIf="view == 'scatter'" class="col-12 col-md-6">
+        <canvas
+          baseChart
+          [datasets]="hourMoodData"
+          [options]="moodOptions"
+          [chartType]="'scatter'"
+          [colors]="moodColors"
+        >
+        </canvas>
+      </div>
+      <div *ngIf="view == 'scatter'" class="col-12 col-md-6">
+        <canvas
+          baseChart
+          [datasets]="hourFocusData"
+          [options]="focusOptions"
+          [chartType]="'scatter'"
+          [colors]="focusColors"
+        >
+        </canvas>
+      </div>
     </div>
   </div>
 </div>
-<!-- <div class="text-center mt-4">
-  <button class="btn btn-light mx-2">
+<div class="text-center mt-4">
+  <button
+    class="btn btn-light mx-2"
+    [class.active]="view == 'week'"
+    (click)="switchGraph('week')"
+  >
+    Week
+  </button>
+  <button class="btn btn-light mx-2"  [class.active]="view == 'year'" (click)="switchGraph('year')">
     Year
   </button>
-  <button class="btn btn-light mx-2">Month</button>
-  <button class="btn btn-light mx-2">Week</button>
-</div> -->
-<div class="text-center mt-4">
+
+  <button class="btn btn-light mx-2" [class.active]="view == 'scatter'" (click)="switchGraph('scatter')">
+    Scatter
+  </button>
+</div>
+<div *ngIf="view == 'week'" class="text-center mt-4">
   <button class="btn btn-light mx-2" (click)="prevSunday()">
     Previous Week
   </button>
   <button class="btn btn-light mx-2" (click)="nextSunday()">Next Week</button>
 </div>
-<!-- <div class="text-center mt-4">
-  <button
-    class="btn btn-light mx-2"
-    [class.active]="view == 'hours'"
-    (click)="switchGraph('hours')"
-  >
-    Hours
+<div *ngIf="view == 'year'" class="text-center mt-4">
+  <button class="btn btn-light mx-2" (click)="prevYear()">
+    Previous Year
   </button>
-  <button
-    class="btn btn-light mx-2"
-    [class.active]="view == 'mood'"
-    (click)="switchGraph('mood')"
-  >
-    Mood
-  </button>
-  <button
-    class="btn btn-light mx-2"
-    [class.active]="view == 'focus'"
-    (click)="switchGraph('focus')"
-  >
-    Focus
-  </button>
-</div> -->
+  <button class="btn btn-light mx-2" (click)="nextYear()">Next Year</button>
+</div>
 
-<div class="container text-center mt-4">
+<div *ngIf="view == 'week'" class="container text-center mt-4">
   <p *ngIf="notes.length > 0">Notes from this week</p>
   <p *ngIf="notes.length == 0">No notes from this week</p>
   <div class="row">
