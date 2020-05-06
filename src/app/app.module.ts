@@ -16,10 +16,11 @@ import { JournalComponent } from './journal/journal.component';
 import { JournalFormComponent } from './journal/journal-form/journal-form.component';
 import {ReactiveFormsModule, FormsModule} from "@angular/forms";
 import { NavbarComponent } from './navbar/navbar.component';
-import { ProfileDataComponent } from './profile/profile-data/profile-data.component'
+import { ProfileDataComponent } from './profile/profile-data/profile-data.component';
+import { AboutComponent } from './about/about.component'
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, IntroComponent, LearnComponent,ProfileComponent, JournalComponent, JournalFormComponent, NavbarComponent, ProfileDataComponent],
+  declarations: [AppComponent, HomeComponent, IntroComponent, LearnComponent,ProfileComponent, JournalComponent, JournalFormComponent, NavbarComponent, ProfileDataComponent, AboutComponent],
   imports: [BrowserModule, BrowserAnimationsModule, AppRoutingModule, FontAwesomeModule, ReactiveFormsModule, FormsModule, ChartsModule, NgxChartsModule],
   providers: [],
   bootstrap: [AppComponent],

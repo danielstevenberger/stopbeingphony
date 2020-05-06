@@ -7,11 +7,38 @@
   class="learn"
 >
   <div class="container">
-    <h1 class="text-center fact-title">Fact Title</h1>
-    <p class="lead text-center fact-info">Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum soluta doloribus eligendi, tempora voluptatem magnam quibusdam at tenetur amet laudantium officiis assumenda nihil similique temporibus culpa porro sequi nobis nostrum! Eum aperiam qui et quis quos tenetur autem illum at nostrum voluptatum. Blanditiis quibusdam mollitia consequatur perferendis accusamus quos cumque?</p>
+    <h1 *ngIf="learn ==0" class="text-center fact-title">Smartphone Addiction is Real</h1>
+    <p *ngIf="learn ==0" class="lead text-center fact-info">
+      Yes, smartphone addiction is thriving. It strikes innocent victims as they
+      spend countless hours texting, talking, gaming, surfing, posing and
+      posting. In just a brief time, users can't imagine life without a phone;
+      they become completely dependent. What they may not realize is that this
+      compulsion is dangerous. Smartphones reduce willpower to nothing. The
+      sanest of people become mindlessly preoccupied. Notifications must get
+      checked immediately. Social media feeds are constantly refreshed. Phones
+      receive more attention than reality; family, friends, and co-worker take a
+      back seat. Dr. David Greenfield, the founder and medical director for the
+      Center for Internet & Technology Addiction, warns that smartphone
+      condition behavior. Without a doubt, smartphones affect mood and focus.
+    </p>
+    <h1 *ngIf="learn ==1" class="text-center fact-title">Learn 2</h1>
+    <p *ngIf="learn ==1" class="lead text-center fact-info">
+     Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fuga soluta autem fugiat repudiandae illum itaque architecto odio, voluptatibus earum quibusdam qui ab. Delectus nulla voluptates itaque nemo non repellat, ex placeat amet iusto est maxime sit perspiciatis quisquam soluta ducimus eaque commodi. Porro a asperiores, dolorum voluptatum laboriosam magnam! Facere mollitia voluptates, porro distinctio nemo neque doloremque maiores nihil quos minima quam. Voluptatem ex quo impedit corrupti nesciunt. Iusto facere nostrum officiis dicta pariatur, recusandae ipsa impedit? Harum, eos quo! Saepe illo doloribus ratione minima hic numquam, doloremque ex aperiam! Eligendi ullam qui mollitia suscipit laboriosam. Aspernatur in aliquid quibusdam.
+    </p>
+    <h1 *ngIf="learn ==2" class="text-center fact-title">Learn 3</h1>
+    <p *ngIf="learn ==2" class="lead text-center fact-info">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit odio rerum expedita dolore nam doloribus amet fuga reprehenderit nulla neque eius possimus iusto, debitis eum animi quis eligendi! Nihil exercitationem sapiente nostrum, fugit harum maxime ut accusamus quas sed error cum iusto in eius adipisci nam! Dolore, ipsa obcaecati dolorum numquam, quas perspiciatis eaque sapiente nostrum aspernatur sed optio voluptatibus ullam qui aperiam velit tenetur vel praesentium accusamus aliquid molestiae. Consequuntur, debitis? Non doloribus tenetur maxime aut dolores perferendis iusto maiores officiis id repellendus exercitationem quibusdam nihil animi aliquid rerum ad, magnam repellat fugiat, amet alias. Ipsam quos veritatis enim?
+    </p>
     <div class="button-control">
-      <button>Previous Fact</button>
-      <button>Next Fact</button>
+      <button class="control-button" (click)="nextFact('prev')">
+        <fa-icon class="control-button_left" [icon]="faAngleDoubleLeft"></fa-icon>
+      </button>
+      <button class="control-button" (click)="nextFact('next')">
+        <fa-icon
+          class="control-button_right"
+          [icon]="faAngleDoubleRight"
+        ></fa-icon>
+      </button>
     </div>
   </div>
 </div>

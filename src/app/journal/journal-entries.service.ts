@@ -115,7 +115,7 @@ export class JournalEntriesService {
 
   checkDay(d: Date) {
     for (let i = 0; i < this.jouranlEntries.length; i++) {
-      if (this.jouranlEntries[i].date.getDate() == d.getDate()) {
+      if (this.jouranlEntries[i].date.getDay() == d.getDay() && this.jouranlEntries[i].date.getFullYear() == d.getFullYear() && this.jouranlEntries[i].date.getMonth() == d.getMonth()) {
         return false;
       }
     }
@@ -211,30 +211,34 @@ export class JournalEntriesService {
   }
 
   getHoursMood() {
-    var hoursMood: Array<object>
+    var hoursMood: Array<object>;
     for (var i = 0; i < this.jouranlEntries.length; i++) {
-      var dataSet = {x: this.jouranlEntries[i].time, y: this.jouranlEntries[i].mood}
-      if(i == 0){
-        hoursMood = [dataSet]
-      }
-      else{
-        hoursMood.push(dataSet)
+      var dataSet = {
+        x: this.jouranlEntries[i].time,
+        y: this.jouranlEntries[i].mood,
+      };
+      if (i == 0) {
+        hoursMood = [dataSet];
+      } else {
+        hoursMood.push(dataSet);
       }
     }
-    return hoursMood
+    return hoursMood;
   }
 
   getHoursFocus() {
-    var hoursfocus: Array<object>
+    var hoursfocus: Array<object>;
     for (var i = 0; i < this.jouranlEntries.length; i++) {
-      var dataSet = {x: this.jouranlEntries[i].time, y: this.jouranlEntries[i].focus}
-      if(i == 0){
-        hoursfocus = [dataSet]
-      }
-      else{
-        hoursfocus.push(dataSet)
+      var dataSet = {
+        x: this.jouranlEntries[i].time,
+        y: this.jouranlEntries[i].focus,
+      };
+      if (i == 0) {
+        hoursfocus = [dataSet];
+      } else {
+        hoursfocus.push(dataSet);
       }
     }
-    return hoursfocus
+    return hoursfocus;
   }
 }
